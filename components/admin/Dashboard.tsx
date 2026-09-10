@@ -4,9 +4,9 @@ import { useActionState, useEffect, useRef, useState } from 'react';
 import { addGuest, logout, type AddState } from '@/app/admin/actions';
 import type { Guest } from '@/lib/guests';
 
-type Props = { guests: Guest[]; baseUrl: string; usingSheet: boolean };
+type Props = { guests: Guest[]; baseUrl: string; usingSheet: boolean; loadError?: string };
 
-export default function Dashboard({ guests, baseUrl, usingSheet }: Props) {
+export default function Dashboard({ guests, baseUrl, usingSheet, loadError }: Props) {
   const [state, action, pending] = useActionState<AddState | undefined, FormData>(addGuest, undefined);
   const [filter, setFilter] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
@@ -39,6 +39,12 @@ export default function Dashboard({ guests, baseUrl, usingSheet }: Props) {
           </button>
         </form>
       </header>
+
+      {loadError && (
+        <p className="admin-banner admin-banner-error" role="alert">
+          <strong>Could not load the guest list from Google Sheets.</strong> {loadError}
+        </p>
+      )}
 
       {!usingSheet && (
         <p className="admin-banner">

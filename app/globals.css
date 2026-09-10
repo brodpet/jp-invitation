@@ -575,3 +575,5 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .linkrow button.is-copied { background: var(--moss); color: var(--paper); }
 .linkrow.is-big a { font-size: 1rem; padding: .7rem 1rem; }
 .linkrow.is-big button { padding: 0 1.1rem; }
+.admin-banner-error { background: rgba(184, 88, 58, .12); border-left-color: var(--terracotta); }
+.admin-banner-error strong { display: block; margin-bottom: .2rem; }

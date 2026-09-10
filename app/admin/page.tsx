@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { adminConfigured, isAdmin } from '@/lib/admin-auth';
-import { listGuests } from '@/lib/guests';
+import { listGuests, type Guest } from '@/lib/guests';
 import LoginForm from '@/components/admin/LoginForm';
 import Dashboard from '@/components/admin/Dashboard';
 
@@ -33,6 +33,21 @@ export default async function AdminPage() {
 
   if (!(await isAdmin())) return <LoginForm />;
 
-  const [guests, base] = await Promise.all([listGuests(), siteUrl()]);
-  return <Dashboard guests={guests} baseUrl={base} usingSheet={Boolean(process.env.SHEETS_WEBHOOK_URL)} />;
+  const base = await siteUrl();
+  let guests: Guest[] = [];
+  let loadError: string | undefined;
+  try {
+    guests = await listGuests();
+  } catch (err) {
+    loadError = err instanceof Error ? err.message : 'Could not load guests.';
+    console.error('[admin] listGuests failed:', err);
+  }
+  return (
+    <Dashboard
+      guests={guests}
+      baseUrl={base}
+      usingSheet={Boolean(process.env.SHEETS_WEBHOOK_URL)}
+      loadError={loadError}
+    />
+  );
 }

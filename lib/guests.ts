@@ -100,8 +100,7 @@ type SheetsResponse = { ok: boolean; error?: string; guest?: Guest; guests?: Gue
 async function sheetsGet(params: Record<string, string>): Promise<SheetsResponse> {
   const qs = new URLSearchParams(params).toString();
   const res = await fetch(`${SHEETS_URL}?${qs}`, { cache: 'no-store', redirect: 'follow' });
-  if (!res.ok) throw new Error(`Sheets request failed: ${res.status}`);
-  return (await res.json()) as SheetsResponse;
+  return parseSheets(res);
 }
 
 async function sheetsPost(body: Record<string, unknown>): Promise<SheetsResponse> {
@@ -111,8 +110,32 @@ async function sheetsPost(body: Record<string, unknown>): Promise<SheetsResponse
     body: JSON.stringify(body),
     redirect: 'follow',
   });
-  if (!res.ok) throw new Error(`Sheets write failed: ${res.status}`);
-  return (await res.json().catch(() => ({ ok: false, error: 'Invalid response from Sheets' }))) as SheetsResponse;
+  return parseSheets(res);
+}
+
+// Turn whatever Apps Script sent back into a clear, actionable error message.
+async function parseSheets(res: Response): Promise<SheetsResponse> {
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Google Sheets returned HTTP ${res.status}. ${hint(text)}`);
+  let data: SheetsResponse;
+  try {
+    data = JSON.parse(text) as SheetsResponse;
+  } catch {
+    throw new Error(`Google Sheets did not return JSON. ${hint(text)}`);
+  }
+  if (!data.ok && data.error === 'unauthorized') {
+    throw new Error('Google Sheets rejected the admin secret. SHEETS_ADMIN_SECRET must equal ADMIN_SECRET in the Apps Script.');
+  }
+  if (!data.ok && data.error === 'missing_code') {
+    throw new Error('The Apps Script is an old version without the admin actions. Paste the latest docs/google-apps-script.gs and deploy a New version.');
+  }
+  return data;
+}
+
+function hint(text: string) {
+  if (/accounts\.google\.com|Sign in/i.test(text)) return 'The web app is not public: redeploy with "Who has access: Anyone".';
+  if (/<html/i.test(text)) return 'It returned an HTML page instead of data; check the deployment URL ends in /exec.';
+  return `Response started with: ${text.slice(0, 120).replace(/\s+/g, ' ')}`;
 }
 
 async function readDev(): Promise<Guest[]> {
