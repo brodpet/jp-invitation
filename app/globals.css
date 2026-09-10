@@ -131,129 +131,159 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ── Envelope intro ──────────────────────────────────────────────────── */
 .envelope {
+  --envelope-stock: #cbd2a5;
+  --envelope-lining: #e0e4bf;
+  --envelope-print: #42472d;
+  --flap-height: 43%;
+  --botanical-size: 520px 680px;
   position: fixed; inset: 0; z-index: 10000;
-  transition: opacity .9s var(--ease);
+  display: block; width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; outline: none; overflow: hidden;
+  color: var(--envelope-print); background: transparent;
 }
-.envelope.is-fading { opacity: 0; pointer-events: none; }
-.envelope.is-gone { display: none; }
-
-/* Full-bleed envelope body: sage paper with an embossed botanical pattern */
-.env-paper {
-  position: absolute; inset: 0; overflow: hidden;
-  background-color: #cfd8c7;
-  background-image:
-    radial-gradient(ellipse 90% 70% at 50% 110%, rgba(28, 46, 37, .28), transparent 65%),
-    url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27 viewBox=%270 0 220 220%27%3E%3Cg fill=%27none%27 stroke=%27rgba(63,93,76,0.34)%27 stroke-width=%271.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M20 200 C 60 160, 100 120, 170 50%27/%3E%3Cpath d=%27M62 158 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z%27/%3E%3Cpath d=%27M92 128 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z%27/%3E%3Cpath d=%27M92 128 c 4 -24, 20 -42, 44 -46 c -2 24, -18 42, -44 46z%27/%3E%3Cpath d=%27M122 98 c -20 -14, -30 -36, -22 -58 c 20 8, 30 32, 22 58z%27/%3E%3Cpath d=%27M122 98 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z%27/%3E%3Cpath d=%27M150 70 c 0 -18, 8 -30, 20 -36 c 4 14, -4 30, -20 36z%27/%3E%3Cg transform=%27rotate(180 110 110) translate(-10 -6)%27%3E%3Cpath d=%27M20 200 C 60 160, 100 120, 170 50%27/%3E%3Cpath d=%27M62 158 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z%27/%3E%3Cpath d=%27M92 128 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z%27/%3E%3Cpath d=%27M122 98 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-size: auto, 220px 220px;
-  perspective: 1400px;
-  display: grid; align-content: end; justify-items: center;
+.envelope::backdrop { background: transparent; }
+.envelope-paper, .envelope-flap-paper::before {
+  background-color: var(--envelope-stock);
+  background-image: url('/envelope-botanical.svg');
+  background-size: var(--botanical-size);
+  background-position: center top;
 }
-/* emboss: the pattern's own faint highlight */
-.env-paper::before {
+.envelope-paper { position: absolute; inset: 0; }
+.envelope-paper::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27 viewBox=%270 0 220 220%27%3E%3Cg fill=%27none%27 stroke=%27rgba(255,255,255,0.35)%27 stroke-width=%271.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M20 200 C 60 160, 100 120, 170 50%27/%3E%3Cpath d=%27M62 158 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z%27/%3E%3Cpath d=%27M92 128 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z%27/%3E%3Cpath d=%27M92 128 c 4 -24, 20 -42, 44 -46 c -2 24, -18 42, -44 46z%27/%3E%3Cpath d=%27M122 98 c -20 -14, -30 -36, -22 -58 c 20 8, 30 32, 22 58z%27/%3E%3Cpath d=%27M122 98 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z%27/%3E%3Cpath d=%27M150 70 c 0 -18, 8 -30, 20 -36 c 4 14, -4 30, -20 36z%27/%3E%3Cg transform=%27rotate(180 110 110) translate(-10 -6)%27%3E%3Cpath d=%27M20 200 C 60 160, 100 120, 170 50%27/%3E%3Cpath d=%27M62 158 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z%27/%3E%3Cpath d=%27M92 128 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z%27/%3E%3Cpath d=%27M122 98 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-size: 220px 220px; background-position: 1px 1px;
-  mix-blend-mode: soft-light;
+  background: radial-gradient(ellipse at 50% 25%, #f7f7d42b, #5056300d);
 }
-/* side pockets, drawn as two soft diagonals so the flap has an envelope to sit on */
-.env-paper::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(to bottom right, transparent 49.6%, rgba(28, 46, 37, .10) 50%, transparent 50.6%) no-repeat 0 0 / 50% 100%,
-    linear-gradient(to bottom left,  transparent 49.6%, rgba(28, 46, 37, .10) 50%, transparent 50.6%) no-repeat 100% 0 / 50% 100%;
-}
-
-/* Flap: full-width triangle hinged at the top */
-.env-flap {
-  position: absolute; left: 0; right: 0; top: 0; height: clamp(180px, 34svh, 360px);
-  transform-origin: top center; transform-style: preserve-3d;
-  transition: transform 1.1s cubic-bezier(.65, 0, .25, 1) .35s;
-  z-index: 3;
-}
-.env-flap-face {
+.envelope-perspective {
   position: absolute; inset: 0;
-  background-color: var(--ink);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27 viewBox=%270 0 220 220%27%3E%3Cg fill=%27none%27 stroke=%27rgba(244,238,226,0.16)%27 stroke-width=%271.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M20 200 C 60 160, 100 120, 170 50%27/%3E%3Cpath d=%27M62 158 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z%27/%3E%3Cpath d=%27M92 128 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z%27/%3E%3Cpath d=%27M92 128 c 4 -24, 20 -42, 44 -46 c -2 24, -18 42, -44 46z%27/%3E%3Cpath d=%27M122 98 c -20 -14, -30 -36, -22 -58 c 20 8, 30 32, 22 58z%27/%3E%3Cpath d=%27M122 98 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z%27/%3E%3Cpath d=%27M150 70 c 0 -18, 8 -30, 20 -36 c 4 14, -4 30, -20 36z%27/%3E%3Cg transform=%27rotate(180 110 110) translate(-10 -6)%27%3E%3Cpath d=%27M20 200 C 60 160, 100 120, 170 50%27/%3E%3Cpath d=%27M62 158 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z%27/%3E%3Cpath d=%27M92 128 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z%27/%3E%3Cpath d=%27M122 98 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-size: 220px 220px;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  filter: drop-shadow(0 18px 24px rgba(28, 46, 37, .35));
+  perspective: 8000px; perspective-origin: 50% 0;
+  pointer-events: none;
 }
-.envelope.is-open .env-flap { transform: rotateX(-178deg); }
-.envelope.is-open .env-flap-face { filter: none; background-color: var(--ink-soft); }
-
-/* Wax seal, in two halves that crack apart */
+.envelope-flap {
+  position: absolute; inset: 0 0 auto; height: var(--flap-height);
+  transform-origin: 50% 0; transform-style: preserve-3d;
+}
+.envelope-flap-paper {
+  position: absolute; inset: 0;
+  background: var(--envelope-lining);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+  backface-visibility: hidden;
+}
+.envelope-flap-paper::before {
+  content: ''; position: absolute; inset: 0 0 17px;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+  background-color: #d4dab1;
+}
+.envelope-flap-paper::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(165deg, #f9f9dd30, transparent 65%);
+}
+.envelope-shadow {
+  position: absolute; inset: 0 0 auto; height: var(--flap-height);
+  transform: translateY(15px); transform-origin: 50% 0;
+  filter: blur(9px); opacity: .6; pointer-events: none;
+}
+.envelope-shadow::before {
+  content: ''; position: absolute; inset: 0;
+  background: #171b0b;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
 .seal {
-  position: absolute; left: 50%; top: clamp(180px, 34svh, 360px); transform: translate(-50%, -50%);
-  width: 6.25rem; height: 6.25rem; border: 0; padding: 0; background: none;
-  cursor: pointer; z-index: 4;
-  filter: drop-shadow(0 10px 18px rgba(147, 67, 43, .55));
-  animation: seal-breathe 2.8s var(--ease) infinite;
+  position: absolute; left: 50%; top: 100%;
+  transform: translate(-50%, -50%) translateZ(3px);
+  width: clamp(108px, 34vw, 158px); aspect-ratio: 1;
+  padding: 9px; border: 1px solid #a63229;
+  border-radius: 48% 51% 49% 47% / 49% 46% 53% 50%;
+  background: linear-gradient(145deg, #ffb092 0%, #f17c69 17%, #bb4038 52%, #f47c68 83%, #91312b);
+  box-shadow: 0 4px 0 #953129, 0 7px 0 #6d2b24,
+    0 15px 14px -4px #151809a6, inset 0 2px 3px #ffcfac,
+    inset 0 -3px 4px #972e27;
+  color: #a83d32; cursor: pointer; pointer-events: auto;
+  backface-visibility: hidden; -webkit-tap-highlight-color: transparent;
 }
-.seal:hover { animation-play-state: paused; transform: translate(-50%, -50%) scale(1.04); }
-.seal:focus-visible { outline: 2px solid var(--paper); outline-offset: 6px; border-radius: 50%; }
-@keyframes seal-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.035); } }
-.seal-half {
-  position: absolute; inset: 0; border-radius: 50%;
-  background:
-    radial-gradient(circle at 38% 30%, rgba(255, 255, 255, .35), transparent 38%),
-    radial-gradient(circle at 50% 50%, #cf6d4f 0%, var(--terracotta) 55%, var(--terracotta-deep) 100%);
-  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .12), inset 0 -6px 10px rgba(0, 0, 0, .28), inset 0 4px 6px rgba(255, 255, 255, .18);
-  display: grid; place-items: center; color: var(--paper);
-  transition: transform .9s cubic-bezier(.5, 0, .8, .4), opacity .45s ease .5s;
+.seal-rim {
+  position: relative; display: block; width: 100%; height: 100%;
+  border: 3px solid #b34639; border-radius: 50%;
+  background: radial-gradient(circle at 38% 27%, #ed8b78, #e67563 65%, #ca5548);
+  box-shadow: 0 1px 2px #ffb095, 0 -1px 2px #863b2d,
+    inset 0 3px 4px #973a31, inset 0 -2px 2px #ffb599;
 }
-/* jagged crack line, slightly different on each half so they interlock */
-.seal-left  { clip-path: polygon(0 0, 53% 0, 46% 22%, 56% 42%, 45% 60%, 54% 78%, 48% 100%, 0 100%); }
-.seal-right { clip-path: polygon(53% 0, 100% 0, 100% 100%, 48% 100%, 54% 78%, 45% 60%, 56% 42%, 46% 22%); }
-.seal-mono { font-family: var(--display); font-weight: 600; font-size: 1.7rem; letter-spacing: .02em; }
-.seal-mono em { font-style: italic; font-weight: 300; font-size: .85em; margin: 0 .04em; }
-.envelope.is-open .seal { animation: none; pointer-events: none; filter: none; }
-.envelope.is-open .seal-left  { transform: translate(-70px, 140px) rotate(-38deg); opacity: 0; }
-.envelope.is-open .seal-right { transform: translate(78px, 160px) rotate(31deg); opacity: 0; transition-delay: .06s, .56s; }
-
-/* Text printed on the envelope body */
-.env-text {
-  position: relative; z-index: 2; display: grid; justify-items: center; gap: .6rem;
-  padding: 0 1.5rem 6svh; text-align: center; color: var(--ink);
-  transition: opacity .5s ease .6s, transform .8s var(--ease) .6s;
+.seal-rim::after {
+  content: ''; position: absolute; inset: 4px; border: 1px solid #f4a088;
+  border-radius: 50%; box-shadow: 0 1px 1px #b34434;
 }
-.env-to { display: grid; gap: .25rem; justify-items: center; }
-.env-to .eyebrow { color: var(--terracotta-deep); }
-.env-name { font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(1.4rem, 5vw, 2rem); font-variation-settings: 'opsz' 40; }
-.env-invited {
-  font-family: var(--display); font-style: italic; font-weight: 300;
-  font-size: clamp(2.6rem, 10vw, 4.2rem); line-height: 1; letter-spacing: -.02em;
-  font-variation-settings: 'opsz' 144, 'SOFT' 60; color: var(--ink);
+.seal-mono {
+  position: absolute; inset: 0; font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  font-weight: 400; font-style: italic; font-size: clamp(47px, 15vw, 68px);
+  text-shadow: 0 1px 0 #ffc0a1; line-height: 1;
 }
-.envelope-hint { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: rgba(28, 46, 37, .6); margin-top: .4rem; }
-.envelope.is-open .env-text { opacity: 0; transform: translateY(14px); }
-
-/* The card that rises out */
-.env-card {
-  position: absolute; left: 50%; top: 50%; z-index: 1;
-  width: min(84vw, 24rem); aspect-ratio: 1.5;
-  transform: translate(-50%, -32%) scale(.86);
-  background: var(--paper); border-radius: 3px;
-  box-shadow: 0 30px 60px -20px rgba(28, 46, 37, .5), 0 2px 8px rgba(28, 46, 37, .15);
-  display: grid; place-content: center; justify-items: center; gap: .5rem; text-align: center;
-  opacity: 0;
-  transition: transform 1.1s var(--ease) 1.05s, opacity .5s ease 1.05s;
+.seal-mono span { position: absolute; top: 15%; left: 23%; transform: rotate(-17deg); }
+.seal-mono span + span { top: 26%; left: 39%; transform: rotate(14deg); }
+.seal-flourish { position: absolute; inset: 6%; width: 88%; height: 88%; stroke: #a83d32; stroke-width: 1.2; }
+.seal:focus-visible { outline: 3px solid #fff5d6; outline-offset: 8px; border-radius: 50%; }
+.seal[aria-disabled='true'] { cursor: default; pointer-events: none; }
+.envelope-address {
+  position: absolute; top: 63%; left: 1.5rem; right: 1.5rem;
+  text-align: center; pointer-events: none;
 }
-.env-card-mono { font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--terracotta); letter-spacing: .04em; }
-.env-card-mono em { font-style: italic; font-weight: 300; }
-.env-card-line { font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(1.8rem, 6vw, 2.4rem); color: var(--ink); line-height: 1; }
-.env-card-sub { font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.envelope.is-open .env-card { opacity: 1; transform: translate(-50%, -50%) scale(1); z-index: 5; }
-
+.envelope-invited {
+  font-family: 'Palatino Linotype', 'Book Antiqua', var(--display);
+  font-size: clamp(2.2rem, 8.5vw, 3.8rem); font-weight: 400; font-style: italic;
+  line-height: 1.2; letter-spacing: -.055em;
+  text-shadow: 0 1px #f8fad24d;
+}
+.envelope-guest {
+  margin: 1rem auto 0; max-width: 28ch;
+  font-family: var(--display); font-size: clamp(1rem, 3.8vw, 1.4rem);
+  font-style: italic; line-height: 1.35; overflow-wrap: anywhere;
+}
+.envelope-hint {
+  position: absolute; bottom: max(2.5rem, env(safe-area-inset-bottom)); left: 4rem; right: 4rem;
+  text-align: center; font-size: .75rem; color: #444a30;
+}
 .envelope-skip {
-  position: absolute; right: .75rem; top: .75rem; z-index: 6;
-  background: rgba(244, 238, 226, .55); border: 0; border-radius: 999px; padding: .6rem 1rem; min-height: 44px;
-  font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ink); cursor: pointer; backdrop-filter: blur(6px);
+  position: absolute; right: max(1rem, env(safe-area-inset-right)); bottom: max(1.6rem, env(safe-area-inset-bottom));
+  background: #e4e7c4c9; border: 1px solid #7e85543d; border-radius: 50%;
+  padding: .5rem; min-width: 44px; min-height: 44px;
+  font-size: .6875rem; color: #444a30; cursor: pointer;
 }
-.envelope-skip:hover { background: rgba(244, 238, 226, .85); }
-
-@media (prefers-reduced-motion: reduce) {
-  .seal { animation: none; }
+.envelope.is-open { animation: envelope-reveal .4s ease-in 1.8s both; }
+.envelope.is-open .envelope-flap { animation: envelope-lift 1.8s linear both; }
+.envelope.is-open .envelope-shadow { animation: envelope-shadow-lift 1.8s linear both; }
+.envelope.is-open .envelope-hint { opacity: 0; transition: opacity .15s; }
+@keyframes envelope-lift {
+  /* The reference travels upward as it tilts; the seal stays visible at the top. */
+  0% { transform: translateY(0) rotateX(0deg); }
+  20% { transform: translateY(-3%) rotateX(16deg); }
+  40% { transform: translateY(-10%) rotateX(28deg); }
+  60% { transform: translateY(-18%) rotateX(40deg); }
+  80% { transform: translateY(-28%) rotateX(52deg); }
+  95% { transform: translateY(-39%) rotateX(62deg); }
+  100% { transform: translateY(-65%) rotateX(68deg); }
+}
+@keyframes envelope-shadow-lift {
+  0% { transform: translateY(15px) scaleY(1); filter: blur(9px); opacity: .6; }
+  25% { transform: translateY(36px) scaleY(1.05); filter: blur(18px); opacity: .72; }
+  55% { transform: translateY(15px) scaleY(.94); filter: blur(24px); opacity: .76; }
+  80% { transform: translateY(-35px) scaleY(.75); filter: blur(28px); opacity: .65; }
+  95% { transform: translateY(-65px) scaleY(.65); filter: blur(25px); opacity: .5; }
+  100% { transform: translateY(-100px) scaleY(.2); filter: blur(20px); opacity: 0; }
+}
+@keyframes envelope-reveal { from { opacity: 1; } to { opacity: 0; } }
+@media (min-width: 760px) {
+  .envelope { --flap-height: 44%; --botanical-size: 600px 785px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .seal { width: 96px; padding: 6px; }
+  .seal-mono { font-size: 42px; }
+  .envelope-address { top: 65%; }
+  .envelope-invited { font-size: 2rem; }
+  .envelope-guest { margin-top: .25rem; font-size: .875rem; }
+  .envelope-hint { bottom: .75rem; }
+  .envelope-skip { bottom: .4rem; }
+}
+@media (max-height: 360px) and (orientation: landscape) {
+  .envelope-hint { left: 1rem; right: auto; }
+  .envelope-guest { max-width: calc(100vw - 12rem); }
 }
 
 /* ── Top bar ─────────────────────────────────────────────────────────── */

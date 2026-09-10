@@ -23,7 +23,7 @@ export default function Invitation({ guest }: { guest?: Guest }) {
       <Envelope guestName={guest?.name} />
       <TopBar />
       <RevealObserver />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Hero guestName={guest?.name} />
         <Story />
         <Details />

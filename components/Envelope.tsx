@@ -1,84 +1,103 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { couple } from '@/lib/content';
 
-type Phase = 'sealed' | 'opening' | 'fading' | 'gone';
+type Phase = 'sealed' | 'opening' | 'gone';
 
 export default function Envelope({ guestName }: { guestName?: string }) {
   const [phase, setPhase] = useState<Phase>('sealed');
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const isGone = phase === 'gone';
 
   useEffect(() => {
-    if (phase === 'gone') {
-      document.body.classList.remove('is-sealed');
+    // Personal RSVP links should still go straight to their destination.
+    if (window.location.hash && window.location.hash !== '#hero') {
+      setPhase('gone');
       return;
     }
+    if (isGone) return;
+
+    const dialog = dialogRef.current;
     document.body.classList.add('is-sealed');
-    return () => document.body.classList.remove('is-sealed');
+    dialog?.showModal();
+    dialog?.focus({ preventScroll: true });
+
+    return () => {
+      dialog?.close();
+      document.body.classList.remove('is-sealed');
+    };
+  }, [isGone]);
+
+  useEffect(() => {
+    if (phase !== 'opening') return;
+    // Match the reference: lift for 1.8s, then dissolve into the invitation.
+    // A fallback also completes the intro if animation events are interrupted.
+    const timeout = window.setTimeout(() => setPhase('gone'), 2300);
+    return () => window.clearTimeout(timeout);
   }, [phase]);
 
   useEffect(() => {
-    // Deep links (e.g. #rsvp shared in a message) go straight to the content.
-    if (window.location.hash && window.location.hash !== '#hero') setPhase('gone');
-  }, []);
+    if (isGone && (!window.location.hash || window.location.hash === '#hero')) {
+      const main = document.getElementById('main');
+      main?.focus({ preventScroll: true });
+    }
+  }, [isGone]);
 
   function open() {
     if (phase !== 'sealed') return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return setPhase('gone');
     setPhase('opening');
-    setTimeout(() => setPhase('fading'), 2300);
-    setTimeout(() => setPhase('gone'), 3200);
   }
 
   if (phase === 'gone') return null;
 
-  const cls = ['envelope', phase !== 'sealed' && 'is-open', phase === 'fading' && 'is-fading']
-    .filter(Boolean)
-    .join(' ');
-
   return (
-    <div className={cls} role="dialog" aria-label="Your invitation" aria-modal="true">
-      <div className="env-paper">
-        {/* The card inside the envelope; rises out once the flap is open */}
-        <div className="env-card" aria-hidden="true">
-          <span className="env-card-mono">
-            A<em>&amp;</em>A
-          </span>
-          <span className="env-card-line">{couple.short}</span>
-          <span className="env-card-sub">09 · 01 · 2027 · Talisay City, Cebu</span>
-        </div>
-
-        <div className="env-flap">
-          <div className="env-flap-face" />
-        </div>
-
-        <button className="seal" type="button" onClick={open} aria-label="Break the seal and open the invitation">
-          <span className="seal-half seal-left" aria-hidden="true">
-            <span className="seal-mono">
-              A<em>&amp;</em>A
+    <dialog
+      ref={dialogRef}
+      className={`envelope${phase === 'opening' ? ' is-open' : ''}`}
+      aria-label={`Your invitation from ${couple.short}`}
+      aria-describedby="envelope-hint"
+      onCancel={(event) => {
+        event.preventDefault();
+        setPhase('gone');
+      }}
+      onAnimationEnd={(event) => {
+        if (event.target === event.currentTarget && event.animationName === 'envelope-reveal') {
+          setPhase('gone');
+        }
+      }}
+    >
+      <div className="envelope-paper" aria-hidden="true" />
+      <div className="envelope-shadow" aria-hidden="true" />
+      <div className="envelope-perspective">
+        <div className="envelope-flap">
+          <div className="envelope-flap-paper" aria-hidden="true" />
+          <button
+            className="seal"
+            type="button"
+            onClick={open}
+            aria-disabled={phase === 'opening'}
+            aria-label="Lift the seal and open the invitation"
+          >
+            <span className="seal-rim" aria-hidden="true">
+              <span className="seal-mono"><span>A</span><span>A</span></span>
+              <svg className="seal-flourish" viewBox="0 0 100 100" fill="none">
+                <path d="M24 61C7 47 40 46 58 66S91 73 79 55M26 29C57 14 78 47 60 58S25 79 27 56M33 71C24 88 17 65 43 53" />
+              </svg>
             </span>
-          </span>
-          <span className="seal-half seal-right" aria-hidden="true">
-            <span className="seal-mono">
-              A<em>&amp;</em>A
-            </span>
-          </span>
-        </button>
-
-        <div className="env-text">
-          <p className="env-to">
-            <span className="eyebrow">{guestName ? 'Hand-delivered to' : 'From Antonio & Axzel'}</span>
-            <span className="env-name">{guestName ?? 'Our dearest guest'}</span>
-          </p>
-          <p className="env-invited">You’re invited</p>
-          <p className="envelope-hint">Tap the seal to open</p>
+          </button>
         </div>
-
-        <button className="envelope-skip" type="button" onClick={open}>
-          Skip
-        </button>
       </div>
-    </div>
+      <div className="envelope-address">
+        <p className="envelope-invited">You are invited</p>
+        {guestName && <p className="envelope-guest">{guestName}</p>}
+      </div>
+      <p className="envelope-hint" id="envelope-hint">Tap the seal to open</p>
+      <button className="envelope-skip" type="button" onClick={() => setPhase('gone')}>
+        Skip
+      </button>
+    </dialog>
   );
 }
