@@ -40,7 +40,7 @@ export default function Hero({ guestName }: { guestName?: string }) {
           </div>
           <div className="hero-actions reveal">
             <a className="btn btn-ink" href="#rsvp">
-              Respond by June 25
+              Respond by December 9
             </a>
             <a className="btn btn-line" href="#details">
               The day’s details

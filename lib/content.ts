@@ -5,15 +5,15 @@ export const couple = {
 };
 
 export const event = {
-  dateLabel: 'Saturday, July 25, 2026',
-  day: '25',
-  month: 'July',
-  year: '2026',
+  dateLabel: 'Saturday, January 9, 2027',
+  day: '9',
+  month: 'January',
+  year: '2027',
   city: 'Talisay City',
   province: 'Cebu',
-  rsvpBy: 'June 25, 2026',
-  startUtc: '20260725T060000Z', // 2:00 PM PHT
-  endUtc: '20260725T130000Z', // 9:00 PM PHT
+  rsvpBy: 'December 9, 2026',
+  startUtc: '20270109T060000Z', // 2:00 PM PHT
+  endUtc: '20270109T130000Z', // 9:00 PM PHT
 };
 
 export const schedule = [

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `For ${guest.name} — Antonio & Axzel`,
     openGraph: {
       title: `${guest.name}, you're invited`,
-      description: 'Antonio & Axzel · July 25, 2026 · Talisay City, Cebu. Open to respond.',
+      description: 'Antonio & Axzel · January 9, 2027 · Talisay City, Cebu. Open to respond.',
     },
   };
 }

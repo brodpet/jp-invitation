@@ -18,14 +18,14 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: 'Antonio & Axzel — July 25, 2026',
+  title: 'Antonio & Axzel — January 9, 2027',
   description:
-    'Antonio Patalinghug III and Axzel Rosel Gallares invite you to their wedding on July 25, 2026 in Talisay City, Cebu.',
+    'Antonio Patalinghug III and Axzel Rosel Gallares invite you to their wedding on January 9, 2027 in Talisay City, Cebu.',
   robots: { index: false, follow: false },
   icons: { icon: '/favicon.svg' },
   openGraph: {
     title: 'Antonio & Axzel — Wedding Invitation',
-    description: 'Gather with us in the garden. July 25, 2026 · Talisay City, Cebu.',
+    description: 'Gather with us in the garden. January 9, 2027 · Talisay City, Cebu.',
     type: 'website',
     locale: 'en_PH',
     siteName: 'Antonio & Axzel',

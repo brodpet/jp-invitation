@@ -1,4 +1,4 @@
-# Antonio & Axzel — Wedding Invitation (Garden Letterpress)
+# Antonio & Axzel — Wedding Invitation (January 9, 2027) (Garden Letterpress)
 
 A restyle of the same single-page invitation concept as clyde-kathy-invitation.vercel.app,
 built with Next.js 16 (App Router) and TypeScript. See `docs/AUDIT.md` for the audit of the original.

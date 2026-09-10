@@ -48,7 +48,7 @@ export default function Envelope({ guestName }: { guestName?: string }) {
           <div className="env-back" />
           <div className="env-card">
             <span className="env-card-line">{couple.short}</span>
-            <span className="env-card-sub">25 · 07 · 2026</span>
+            <span className="env-card-sub">09 · 01 · 2027</span>
           </div>
           <div className="env-front" />
           <div className="env-flap" />
