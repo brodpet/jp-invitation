@@ -15,7 +15,14 @@ Ten minutes, once.
 ## 2. Add the script
 1. Extensions → Apps Script. Delete the sample code.
 2. Paste the contents of `docs/google-apps-script.gs`.
-3. Save. Reload the spreadsheet; an **Invitations** menu appears.
+3. Save (Ctrl+S).
+4. Authorize once: in the editor toolbar, choose **onOpen** in the function dropdown and click **Run**.
+   Accept the "Authorization required" prompt (Review permissions → your account → Advanced →
+   Go to project (unsafe) → Allow). Google skips the menu silently until this is done.
+5. Reload the spreadsheet; an **Invitations** menu appears next to Help.
+
+If the menu still does not show: confirm you opened the editor from **Extensions → Apps Script**
+inside this sheet (not from script.google.com), and that the editor shows no red error underline.
 
 ## 3. Deploy as a web app
 1. In Apps Script: Deploy → New deployment → type **Web app**.
