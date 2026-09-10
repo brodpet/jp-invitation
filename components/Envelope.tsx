@@ -95,9 +95,6 @@ export default function Envelope({ guestName }: { guestName?: string }) {
         {guestName && <p className="envelope-guest">{guestName}</p>}
       </div>
       <p className="envelope-hint" id="envelope-hint">Tap the seal to open</p>
-      <button className="envelope-skip" type="button" onClick={() => setPhase('gone')}>
-        Skip
-      </button>
     </dialog>
   );
 }

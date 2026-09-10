@@ -238,13 +238,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .envelope-hint {
   position: absolute; bottom: max(2.5rem, env(safe-area-inset-bottom)); left: 4rem; right: 4rem;
-  text-align: center; font-size: .75rem; color: #444a30;
-}
-.envelope-skip {
-  position: absolute; right: max(1rem, env(safe-area-inset-right)); bottom: max(1.6rem, env(safe-area-inset-bottom));
-  background: #e4e7c4c9; border: 1px solid #7e85543d; border-radius: 50%;
-  padding: .5rem; min-width: 44px; min-height: 44px;
-  font-size: .6875rem; color: #444a30; cursor: pointer;
+  text-align: center; font-size: clamp(.95rem, 3.2vw, 1.15rem); color: #444a30;
+  letter-spacing: .035em;
 }
 .envelope.is-open { animation: envelope-reveal .4s ease-in 1.8s both; }
 .envelope.is-open .envelope-flap { animation: envelope-lift 1.8s linear both; }
@@ -279,7 +274,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .envelope-invited { font-size: 2rem; }
   .envelope-guest { margin-top: .25rem; font-size: .875rem; }
   .envelope-hint { bottom: .75rem; }
-  .envelope-skip { bottom: .4rem; }
 }
 @media (max-height: 360px) and (orientation: landscape) {
   .envelope-hint { left: 1rem; right: auto; }
