@@ -36,5 +36,5 @@ In the script, set `SITE_URL` to your deployed domain, then Deploy → Manage de
 
 ## Notes
 - Codes are random and unguessable, so a guest cannot open or answer someone else's invitation.
-- The generic page at `/` still works for anyone without a link; those replies land in Replies with an empty code.
+- The generic page at `/` shows the invitation but no RSVP form; it asks the guest to use their personal link. Only coded links can reply.
 - If the sheet is unreachable the site returns an error to the guest instead of silently losing the reply.

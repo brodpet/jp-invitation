@@ -9,7 +9,7 @@ export type Guest = {
 };
 
 export type Reply = {
-  code?: string;
+  code: string;
   name: string;
   attending: 'yes' | 'no';
   guests: number;
@@ -61,7 +61,7 @@ export async function saveReply(reply: Reply): Promise<void> {
   // Local development fallback: update status in the dev file and log the reply.
   const raw = await fs.readFile(DEV_FILE, 'utf8').catch(() => '[]');
   const list = JSON.parse(raw) as Guest[];
-  const g = reply.code ? list.find((x) => x.code.toLowerCase() === reply.code!.toLowerCase()) : undefined;
+  const g = list.find((x) => x.code.toLowerCase() === reply.code.toLowerCase());
   if (g) {
     g.status = reply.attending === 'yes' ? 'accepted' : 'declined';
     await fs.writeFile(DEV_FILE, JSON.stringify(list, null, 2));

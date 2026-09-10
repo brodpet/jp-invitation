@@ -512,3 +512,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .link-arrow-light { background: none; border: 0; padding: 0; margin-top: .5rem; color: var(--ochre); cursor: pointer; }
 .nf { min-height: 100svh; display: grid; align-content: center; justify-items: start; gap: 1.25rem; padding: var(--pad); max-width: 40rem; margin: 0 auto; }
 .nf p { color: var(--muted); font-size: 1.1rem; }
+.rsvp-lede { font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(1.2rem, 2.2vw, 1.5rem); line-height: 1.45; color: rgba(244, 238, 226, .82); max-width: 34ch; }
+.rsvp-notice { display: grid; gap: .5rem; padding: 1.25rem 1.5rem; border: 1px solid rgba(244, 238, 226, .18); background: rgba(244, 238, 226, .05); max-width: 34rem; }
+.rsvp-notice-label { font-size: .75rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ochre); }
+.rsvp-notice p { color: rgba(244, 238, 226, .75); font-family: var(--display); font-style: italic; font-size: 1.1rem; line-height: 1.5; }

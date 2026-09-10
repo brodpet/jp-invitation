@@ -11,13 +11,13 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
   const initial: Status = guest?.status === 'accepted' || guest?.status === 'declined' ? guest.status : 'idle';
   const [status, setStatus] = useState<Status>(initial);
   const [error, setError] = useState('');
-  const maxSeats = guest?.seats ?? 4;
+  const maxSeats = guest?.seats ?? 1;
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError('');
+    if (!guest) return;
     const data = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
-    if (!guest && !data.name?.trim()) return setError('Please tell us your name.');
     if (!data.attending) return setError('Please let us know whether you can attend.');
 
     setStatus('sending');
@@ -25,7 +25,7 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
       const res = await fetch('/api/rsvp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, code: guest?.code }),
+        body: JSON.stringify({ ...data, code: guest.code }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus(data.attending === 'yes' ? 'accepted' : 'declined');
@@ -37,32 +37,48 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
 
   const done = status === 'accepted' || status === 'declined';
 
+  if (!guest) {
+    return (
+      <Chapter
+        id="rsvp"
+        number="08"
+        className="chapter-rsvp"
+        title={
+          <>
+            Will you <em>join us?</em>
+          </>
+        }
+        side={
+          <p className="chapter-note">
+            Kindly respond by <strong>{event.rsvpBy}</strong>. Seats are reserved by name.
+          </p>
+        }
+      >
+        <p className="rsvp-lede reveal">
+          Your personal invitation has been sent. Open the link in your message to confirm your attendance.
+        </p>
+        <div className="rsvp-notice reveal">
+          <span className="rsvp-notice-label">Have an invitation?</span>
+          <p>Use the personal link sent to you to respond. If you can’t find it, message Antonio or Axzel and we’ll resend it.</p>
+        </div>
+      </Chapter>
+    );
+  }
+
   return (
     <Chapter
       id="rsvp"
       number="08"
       className="chapter-rsvp"
       title={
-        guest ? (
-          <>
-            {firstName(guest.name)}, will you <em>join us?</em>
-          </>
-        ) : (
-          <>
-            Will you <em>join us?</em>
-          </>
-        )
+        <>
+          {firstName(guest.name)}, will you <em>join us?</em>
+        </>
       }
       side={
         <p className="chapter-note">
-          Kindly respond by <strong>{event.rsvpBy}</strong>.{' '}
-          {guest ? (
-            <>
-              We have reserved <strong>{guest.seats === 1 ? 'one seat' : `${guest.seats} seats`}</strong> for you.
-            </>
-          ) : (
-            'Seats are reserved by name; please respond only for those listed on your invitation.'
-          )}
+          Kindly respond by <strong>{event.rsvpBy}</strong>. We have reserved{' '}
+          <strong>{guest.seats === 1 ? 'one seat' : `${guest.seats} seats`}</strong> for you.
         </p>
       }
     >
@@ -82,25 +98,16 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
               ? 'Your reply has been recorded. We can’t wait to celebrate with you.'
               : 'Thank you for letting us know. You will be in our thoughts on the day.'}
           </p>
-          {guest && (
-            <button className="link-arrow link-arrow-light" type="button" onClick={() => setStatus('idle')}>
-              Change my reply
-            </button>
-          )}
+          <button className="link-arrow link-arrow-light" type="button" onClick={() => setStatus('idle')}>
+            Change my reply
+          </button>
         </div>
       ) : (
         <form className="rsvp-form reveal" onSubmit={onSubmit} noValidate>
-          {guest ? (
-            <div className="field">
-              <span className="field-label">Responding as</span>
-              <p className="field-static">{guest.name}</p>
-            </div>
-          ) : (
-            <div className="field">
-              <label htmlFor="f-name">Your name</label>
-              <input id="f-name" name="name" type="text" autoComplete="name" required />
-            </div>
-          )}
+          <div className="field">
+            <span className="field-label">Responding as</span>
+            <p className="field-static">{guest.name}</p>
+          </div>
           <fieldset className="field">
             <legend>Will you attend?</legend>
             <div className="choices">

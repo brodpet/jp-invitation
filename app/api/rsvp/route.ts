@@ -9,28 +9,24 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const code = typeof body.code === 'string' && isValidCode(body.code) ? body.code : undefined;
+  const code = typeof body.code === 'string' && isValidCode(body.code) ? body.code : null;
   const attending = body.attending === 'yes' || body.attending === 'no' ? body.attending : null;
-  let name = String(body.name ?? '').trim().slice(0, 120);
-  let guests = Math.max(1, Math.min(10, Number(body.guests) || 1));
 
+  if (!code) {
+    return NextResponse.json({ error: 'A personal invitation link is required to respond' }, { status: 400 });
+  }
   if (!attending) {
     return NextResponse.json({ error: 'Attendance is required' }, { status: 400 });
   }
 
-  if (code) {
-    // Personal link: the guest record is the source of truth for name and seat cap.
-    const guest = await getGuest(code);
-    if (!guest) return NextResponse.json({ error: 'Unknown invitation code' }, { status: 404 });
-    name = guest.name;
-    guests = Math.min(guests, guest.seats);
-  } else if (!name) {
-    return NextResponse.json({ error: 'Name is required' }, { status: 400 });
-  }
+  // The guest record is the source of truth for name and seat cap.
+  const guest = await getGuest(code);
+  if (!guest) return NextResponse.json({ error: 'Unknown invitation code' }, { status: 404 });
+  const guests = Math.min(Math.max(1, Number(body.guests) || 1), guest.seats);
 
   const reply: Reply = {
     code,
-    name,
+    name: guest.name,
     attending,
     guests: attending === 'yes' ? guests : 0,
     contact: String(body.contact ?? '').slice(0, 200),
