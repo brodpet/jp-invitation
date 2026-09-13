@@ -4,15 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 import { couple } from '@/lib/content';
 
 type Phase = 'sealed' | 'opening' | 'gone';
+const OPENED = 'envelope-opened';
 
-export default function Envelope({ guestName }: { guestName?: string }) {
+export default function Envelope({ guestName, onDone }: { guestName?: string; onDone?: () => void }) {
   const [phase, setPhase] = useState<Phase>('sealed');
   const dialogRef = useRef<HTMLDialogElement>(null);
   const isGone = phase === 'gone';
 
   useEffect(() => {
-    // Personal RSVP links should still go straight to their destination.
-    if (window.location.hash && window.location.hash !== '#hero') {
+    // Deep links go straight to their destination, and the envelope only opens once per visit.
+    if ((window.location.hash && window.location.hash !== '#hero') || sessionStorage.getItem(OPENED)) {
       setPhase('gone');
       return;
     }
@@ -38,14 +39,19 @@ export default function Envelope({ guestName }: { guestName?: string }) {
   }, [phase]);
 
   useEffect(() => {
-    if (isGone && (!window.location.hash || window.location.hash === '#hero')) {
-      const main = document.getElementById('main');
-      main?.focus({ preventScroll: true });
+    if (!isGone) return;
+    if (!window.location.hash || window.location.hash === '#hero') {
+      document.getElementById('main')?.focus({ preventScroll: true });
     }
+    onDone?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGone]);
 
   function open() {
     if (phase !== 'sealed') return;
+    try {
+      sessionStorage.setItem(OPENED, '1');
+    } catch {}
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return setPhase('gone');
     setPhase('opening');

@@ -1,53 +1,51 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { chapters } from '@/lib/chapters';
 
-const links = [
-  { href: '#story', label: 'Story' },
-  { href: '#details', label: 'Details' },
-  { href: '#attire', label: 'Attire' },
-  { href: '#entourage', label: 'Entourage' },
-  { href: '#gallery', label: 'Gallery' },
-];
+type Props = { base: string; current?: string; hasHero?: boolean };
 
-export default function TopBar() {
-  const [solid, setSolid] = useState(false);
-  const [active, setActive] = useState('');
+export default function TopBar({ base, current, hasHero }: Props) {
+  const [solid, setSolid] = useState(!hasHero);
 
   useEffect(() => {
+    if (!hasHero) return;
     const hero = document.getElementById('hero');
     if (!hero) return;
-    const heroIo = new IntersectionObserver(([e]) => setSolid(!e.isIntersecting), { threshold: 0.2 });
-    heroIo.observe(hero);
+    const io = new IntersectionObserver(([e]) => setSolid(!e.isIntersecting), { threshold: 0.2 });
+    io.observe(hero);
+    return () => io.disconnect();
+  }, [hasHero]);
 
-    const sectionIo = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive('#' + e.target.id)),
-      { rootMargin: '-40% 0px -55% 0px' },
-    );
-    [...links, { href: '#rsvp' }].forEach((l) => {
-      const s = document.querySelector(l.href);
-      if (s) sectionIo.observe(s);
-    });
-    return () => {
-      heroIo.disconnect();
-      sectionIo.disconnect();
-    };
-  }, []);
+  const home = base || '/';
 
   return (
     <header className={`topbar${solid ? ' is-solid' : ''}`}>
-      <a className="topbar-mark" href="#hero">
+      <Link className="topbar-mark" href={home} aria-label="Back to the invitation">
         A<span>&amp;</span>A
-      </a>
-      <nav className="topbar-nav" aria-label="Sections">
-        {links.map((l) => (
-          <a key={l.href} href={l.href} className={active === l.href ? 'is-active' : undefined}>
-            {l.label}
-          </a>
-        ))}
-        <a href="#rsvp" className="topbar-cta">
+      </Link>
+      <nav className="topbar-nav" aria-label="Pages">
+        {!hasHero && (
+          <Link href={`${home}#chapters`} className="topbar-contents">
+            Contents
+          </Link>
+        )}
+        {chapters
+          .filter((c) => c.slug !== 'rsvp')
+          .map((c) => (
+            <Link
+              key={c.slug}
+              href={`${base}/${c.slug}`}
+              className={current === c.slug ? 'is-active' : undefined}
+              aria-current={current === c.slug ? 'page' : undefined}
+            >
+              {c.nav}
+            </Link>
+          ))}
+        <Link href={`${base}/rsvp`} className="topbar-cta" aria-current={current === 'rsvp' ? 'page' : undefined}>
           RSVP
-        </a>
+        </Link>
       </nav>
     </header>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Invitation from '@/components/Invitation';
+import Hub from '@/components/Hub';
 import { getGuest } from '@/lib/guests';
 
 type Props = { params: Promise<{ code: string }> };
@@ -24,5 +24,5 @@ export default async function PersonalInvitation({ params }: Props) {
   const { code } = await params;
   const guest = await getGuest(code);
   if (!guest) notFound();
-  return <Invitation guest={guest} />;
+  return <Hub guest={guest} />;
 }

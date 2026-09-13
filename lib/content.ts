@@ -12,11 +12,30 @@ export const event = {
   city: 'Talisay City',
   province: 'Cebu',
   rsvpBy: 'December 9, 2026',
-  startUtc: '20270109T060000Z', // 2:00 PM PHT
-  endUtc: '20270109T130000Z', // 9:00 PM PHT
+  startIso: '2027-01-09T06:00:00Z', // 2:00 PM PHT
+  endIso: '2027-01-09T13:00:00Z', // 9:00 PM PHT
+  startUtc: '20270109T060000Z',
+  endUtc: '20270109T130000Z',
 };
 
-export const schedule = [
+export type Stop = {
+  time: string;
+  meridiem: 'AM' | 'PM';
+  label: string;
+  venue?: string;
+  address?: string;
+  mapsQuery?: string;
+  note?: string;
+};
+
+export const schedule: Stop[] = [
+  {
+    time: '1:30',
+    meridiem: 'PM',
+    label: 'Guests arrive',
+    venue: 'San Isidro Labrador Parish',
+    note: 'Please be seated by 1:50. The bride walks in at two.',
+  },
   {
     time: '2:00',
     meridiem: 'PM',
@@ -26,12 +45,51 @@ export const schedule = [
     mapsQuery: 'San Isidro Labrador Parish Talisay City Cebu',
   },
   {
+    time: '3:15',
+    meridiem: 'PM',
+    label: 'Photos in the churchyard',
+    note: 'Family first, then the entourage, then everyone.',
+  },
+  {
     time: '4:30',
     meridiem: 'PM',
-    label: 'Reception',
+    label: 'Cocktails in the garden',
     venue: 'Kishanta Clubhouse',
     address: 'Talisay City, Cebu',
     mapsQuery: 'Kishanta Clubhouse Talisay City Cebu',
+  },
+  { time: '5:30', meridiem: 'PM', label: 'Reception & dinner', venue: 'Kishanta Clubhouse' },
+  { time: '7:00', meridiem: 'PM', label: 'Toasts, first dance & games' },
+  { time: '8:00', meridiem: 'PM', label: 'Dancing until nine' },
+];
+
+export const venues = schedule.filter((s) => s.mapsQuery);
+
+export const storyBeats = [
+  {
+    year: '2019',
+    title: 'A borrowed umbrella',
+    text: 'A sudden downpour in Cebu, one umbrella between two strangers, and a walk that went three blocks past where either of them was going.',
+  },
+  {
+    year: '2020',
+    title: 'The long way home',
+    text: 'Long calls became a habit, then a comfort. When the world went quiet they learned each other in the details: how she takes her coffee, how he hums when he cooks.',
+  },
+  {
+    year: '2023',
+    title: 'A garden in the city',
+    text: 'Their first apartment had a balcony the size of a doormat. They filled it with pots anyway. Everything grew.',
+  },
+  {
+    year: '2026',
+    title: 'The question',
+    text: 'On an ordinary Sunday, under the same borrowed umbrella he had never returned, he asked. She said yes before he finished.',
+  },
+  {
+    year: '2027',
+    title: 'The garden, for real this time',
+    text: 'On the ninth of January they will say it in front of the people who carried them here. This is the beginning of the best chapter yet.',
   },
 ];
 
@@ -42,6 +100,13 @@ export const palette = [
   { name: 'Ochre', hex: '#c2932e' },
   { name: 'Sand', hex: '#d9c7a7' },
   { name: 'Paper', hex: '#f4eee2', border: '#cfc5b0' },
+];
+
+export const looks = [
+  { src: '/attire/look-1.svg', alt: 'Linen suit in sand with a moss waistcoat', label: 'Linen & waistcoat' },
+  { src: '/attire/look-2.svg', alt: 'Tea-length dress in terracotta', label: 'Tea-length, terracotta' },
+  { src: '/attire/look-3.svg', alt: 'Flowing gown in moss green', label: 'Flowing, in moss' },
+  { src: '/attire/look-4.svg', alt: 'Ochre shirt with ink-green trousers and a flat cap', label: 'Ochre & ink, flat cap' },
 ];
 
 export const parents = {

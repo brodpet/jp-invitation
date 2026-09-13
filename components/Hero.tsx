@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Sprig } from './LeafDefs';
+import Countdown from './Countdown';
 import { couple, event, heroPhoto } from '@/lib/content';
 
-export default function Hero({ guestName }: { guestName?: string }) {
+export default function Hero({ guestName, base }: { guestName?: string; base: string }) {
   return (
     <section className="hero" id="hero">
       <Sprig className="sprig sprig-tl" />
@@ -38,13 +40,16 @@ export default function Hero({ guestName }: { guestName?: string }) {
               {event.province}
             </span>
           </div>
+          <div className="reveal">
+            <Countdown />
+          </div>
           <div className="hero-actions reveal">
-            <a className="btn btn-ink" href="#rsvp">
+            <Link className="btn btn-ink" href={`${base}/rsvp`}>
               Respond by December 9
-            </a>
-            <a className="btn btn-line" href="#details">
+            </Link>
+            <Link className="btn btn-line" href={`${base}/details`}>
               The day’s details
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -63,7 +68,7 @@ export default function Hero({ guestName }: { guestName?: string }) {
         </figure>
       </div>
 
-      <a className="scroll-cue" href="#story" aria-label="Scroll to our story">
+      <a className="scroll-cue" href="#chapters" aria-label="Scroll to the pages">
         <span />
       </a>
     </section>

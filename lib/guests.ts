@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { promises as fs } from 'fs';
 import path from 'path';
 
@@ -30,7 +31,7 @@ export function isValidCode(code: string) {
 }
 
 // ── Guest lookup (public, by code) ────────────────────────────────────────
-export async function getGuest(code: string): Promise<Guest | null> {
+export const getGuest = cache(async (code: string): Promise<Guest | null> => {
   if (!isValidCode(code)) return null;
 
   if (SHEETS_URL) {
@@ -41,7 +42,7 @@ export async function getGuest(code: string): Promise<Guest | null> {
   const list = await readDev();
   const g = list.find((x) => x.code.toLowerCase() === code.toLowerCase());
   return g ? normalize(g) : null;
-}
+});
 
 // ── Reply (public, by code) ───────────────────────────────────────────────
 export async function saveReply(reply: Reply): Promise<void> {

@@ -3,7 +3,7 @@ import Chapter from './Chapter';
 export default function GiftNote() {
   return (
     <Chapter
-      id="gift"
+      id="gifts"
       number="07"
       title={
         <>

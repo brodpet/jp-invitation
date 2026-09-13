@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { ViewTransition, type ReactNode } from 'react';
 
 type Props = {
   id: string;
@@ -17,7 +17,9 @@ export default function Chapter({ id, number, title, side, tint, className, chil
       <div className="chapter-grid">
         <aside className="chapter-side">
           <span className="chapter-no">No. {number}</span>
-          <h2 className="chapter-title">{title}</h2>
+          <ViewTransition name={`chapter-${id}`} share="morph" default="none">
+            <h2 className="chapter-title">{title}</h2>
+          </ViewTransition>
           {side}
         </aside>
         <div className="chapter-body">{children}</div>

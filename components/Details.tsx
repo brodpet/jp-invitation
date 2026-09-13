@@ -1,5 +1,5 @@
 import Chapter from './Chapter';
-import { event, schedule } from '@/lib/content';
+import { event, schedule, venues } from '@/lib/content';
 
 function calendarHref() {
   const ics = [
@@ -12,12 +12,16 @@ function calendarHref() {
     `DTSTART:${event.startUtc}`,
     `DTEND:${event.endUtc}`,
     'SUMMARY:Antonio & Axzel — Wedding',
-    `LOCATION:${schedule[0].venue}\\, ${schedule[0].address}`,
-    `DESCRIPTION:${schedule.map((s) => `${s.label} ${s.time} ${s.meridiem} at ${s.venue}`).join('. ')}.`,
+    `LOCATION:${venues[0].venue}\\, ${venues[0].address}`,
+    `DESCRIPTION:${venues.map((s) => `${s.label} ${s.time} ${s.meridiem} at ${s.venue}`).join('. ')}.`,
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
   return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+}
+
+function mapsHref(q: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 }
 
 export default function Details() {
@@ -40,24 +44,28 @@ export default function Details() {
         </>
       }
     >
+      <div className="venues reveal">
+        {venues.map((v) => (
+          <a className="venue-card" href={mapsHref(v.mapsQuery!)} target="_blank" rel="noopener" key={v.label}>
+            <span className="venue-card-label">{v.label}</span>
+            <span className="venue-card-name">{v.venue}</span>
+            <span className="venue-card-addr">{v.address}</span>
+            <span className="link-arrow">Open in Maps</span>
+          </a>
+        ))}
+      </div>
+
+      <h3 className="sub reveal">Order of the day</h3>
       <ol className="timeline">
         {schedule.map((s) => (
-          <li className="timeline-item reveal" key={s.label}>
+          <li className="timeline-item reveal" key={s.time + s.label}>
             <span className="time">
               {s.time} <small>{s.meridiem}</small>
             </span>
             <div>
               <h3>{s.label}</h3>
-              <p className="venue">{s.venue}</p>
-              <p className="addr">{s.address}</p>
-              <a
-                className="link-arrow"
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.mapsQuery)}`}
-                target="_blank"
-                rel="noopener"
-              >
-                Open in Maps
-              </a>
+              {s.venue && <p className="venue">{s.venue}</p>}
+              {s.note && <p className="addr">{s.note}</p>}
             </div>
           </li>
         ))}
