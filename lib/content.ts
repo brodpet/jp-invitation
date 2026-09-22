@@ -94,60 +94,44 @@ export const storyBeats = [
 ];
 
 export const palette = [
-  { name: 'Ink Green', hex: '#1c2e25' },
-  { name: 'Moss', hex: '#3f5d4c' },
-  { name: 'Terracotta', hex: '#b8583a' },
-  { name: 'Ochre', hex: '#c2932e' },
-  { name: 'Sand', hex: '#d9c7a7' },
-  { name: 'Paper', hex: '#f4eee2', border: '#cfc5b0' },
+  { name: 'Clay', hex: '#b3948a' },
+  { name: 'Pale Blush', hex: '#e6d7d0' },
+  { name: 'Gardenia', hex: '#efe7e0', border: '#dccfc6' },
+  { name: 'Latte', hex: '#d4c2aa' },
+  { name: 'Champagne', hex: '#c2a06b' },
+  { name: 'Espresso', hex: '#3b2f2c' },
 ];
 
 export const looks = [
-  { src: '/attire/look-1.svg', alt: 'Linen suit in sand with a moss waistcoat', label: 'Linen & waistcoat' },
-  { src: '/attire/look-2.svg', alt: 'Tea-length dress in terracotta', label: 'Tea-length, terracotta' },
-  { src: '/attire/look-3.svg', alt: 'Flowing gown in moss green', label: 'Flowing, in moss' },
-  { src: '/attire/look-4.svg', alt: 'Ochre shirt with ink-green trousers and a flat cap', label: 'Ochre & ink, flat cap' },
+  { src: '/attire/look-1.svg', alt: 'Linen suit in latte with a clay tie', label: 'Latte linen, clay tie' },
+  { src: '/attire/look-2.svg', alt: 'Satin slip dress in pale blush', label: 'Slip dress, pale blush' },
+  { src: '/attire/look-3.svg', alt: 'Flowing gown in dusty clay', label: 'Flowing, in clay' },
+  { src: '/attire/look-4.svg', alt: 'Champagne shirt with espresso trousers', label: 'Champagne & espresso' },
 ];
 
 export const parents = {
-  bride: ['Jocelyn Londres', 'Ramil Samson'],
-  groom: ['Glenda Dolores', 'Joel Dolores'],
+  bride: ['Mother of the Bride', 'Father of the Bride'],
+  groom: ['Antonio Patalinghug Jr.', 'Marilyn Patalinghug'],
 };
 
 export const roles: { title: string; names: string[]; lead?: boolean }[] = [
-  { title: 'Matron of Honor', names: ['Marianne Fortaliza-Pajares'], lead: true },
-  { title: 'Best Man', names: ['Paul Wilfred Honato'], lead: true },
-  { title: 'Bridesmaids', names: ['Jibon Christine Tapere', 'Honey Quinn Ebarsabal'] },
-  {
-    title: 'Groomsmen',
-    names: ['Argie Bentor', 'Franz Jason Dolores', 'Cedric Gonzalo', 'Vince Bailon', 'Clifford Anthony Buno'],
-  },
-  { title: 'Flower Girls', names: ['Rayleigh Venice Pajares', 'Cianna Catriel Pajares'] },
-  { title: 'Flower Ladies', names: ['Elia Jane Abarrientos', 'Bea Bianca Dolores'] },
-  { title: 'Bearers', names: ['Juan Alfonso Dolores', 'Yuri Cleofe'] },
+  { title: 'Matron of Honor', names: ['Matron of Honor'], lead: true },
+  { title: 'Best Man', names: ['Best Man'], lead: true },
+  { title: 'Bridesmaids', names: ['Bridesmaid 1', 'Bridesmaid 2', 'Bridesmaid 3', 'Bridesmaid 4', 'Bridesmaid 5'] },
+  { title: 'Groomsmen', names: ['Groomsman 1', 'Groomsman 2', 'Groomsman 3', 'Groomsman 4', 'Groomsman 5'] },
+  { title: 'Flower Girls', names: ['Flower Girl 1', 'Flower Girl 2'] },
+  { title: 'Flower Ladies', names: ['Flower Lady 1', 'Flower Lady 2'] },
+  { title: 'Bearers', names: ['Ring Bearer', 'Coin Bearer'] },
 ];
 
-export const principalSponsors: [string, string][] = [
-  ['Bituin', 'Roger Villanueva'],
-  ['Daisy', 'Jaynes Juree Abarrientos'],
-  ['Marlene', 'Deolito Abilong'],
-  ['Maricho', 'Roberto Delos Cientos Jr.'],
-  ['Erlita', 'Emiliano Bulanon'],
-  ['Emily', 'Jaynes James Abarrientos IV'],
-  ['Jenelyn', 'Gerard Vincent Tuballa'],
-  ['Machula', 'Rolando Sarangaya'],
-  ['Mary Jane', 'Danny Dela Peña'],
-  ['Luisa', 'Elmer Magbo-o'],
-  ['Virgie', 'Edwin Cañete'],
-  ['Mona Liza Delmendo', 'Mila Burlaos'],
-  ['Ma. Victoria', 'Isidro Go Jr.'],
-  ['Rhea Ybañez', 'Perlito Londres'],
-  ['Rogelio Jr.', 'Pinky Arcueno'],
-];
+export const principalSponsors: [string, string][] = Array.from({ length: 15 }, (_, i) => [
+  `Ninang ${i + 1}`,
+  `Ninong ${i + 1}`,
+]);
 
 export const secondarySponsors = [
-  { role: 'Candle', pair: ['Neil Clifford', 'Emelyn Dolores'] },
-  { role: 'Veil & Cord', pair: ['Eric', 'Analyn Londres'] },
+  { role: 'Candle', pair: ['Candle Sponsor 1', 'Candle Sponsor 2'] },
+  { role: 'Veil & Cord', pair: ['Veil & Cord Sponsor 1', 'Veil & Cord Sponsor 2'] },
 ];
 
 export const photos = [

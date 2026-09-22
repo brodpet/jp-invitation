@@ -150,7 +150,7 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
               {error}
             </p>
           )}
-          <button className="btn btn-terracotta" type="submit" disabled={status === 'sending'}>
+          <button className="btn btn-clay" type="submit" disabled={status === 'sending'}>
             {status === 'sending' ? 'Sending…' : 'Send our reply'}
           </button>
         </form>

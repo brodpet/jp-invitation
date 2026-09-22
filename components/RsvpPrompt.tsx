@@ -82,7 +82,7 @@ export default function RsvpPrompt({ guest, onClose }: { guest: Guest; onClose: 
                 : 'Thank you for letting us know. If plans change, you can update your reply on the RSVP page.'}
             </p>
             <div className="prompt-actions">
-              <button className="btn btn-terracotta" type="button" onClick={onClose} autoFocus>
+              <button className="btn btn-clay" type="button" onClick={onClose} autoFocus>
                 Open the invitation
               </button>
               <Link className="link-arrow link-arrow-light" href={`${base}/rsvp`} onClick={onClose}>
@@ -145,7 +145,7 @@ export default function RsvpPrompt({ guest, onClose }: { guest: Guest; onClose: 
             )}
 
             <div className="prompt-actions">
-              <button className="btn btn-terracotta" type="button" onClick={submit} disabled={status === 'sending'}>
+              <button className="btn btn-clay" type="button" onClick={submit} disabled={status === 'sending'}>
                 {status === 'sending' ? 'Sending…' : 'Send my reply'}
               </button>
               <button className="link-arrow link-arrow-light" type="button" onClick={skip}>

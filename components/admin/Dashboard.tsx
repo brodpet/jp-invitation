@@ -87,7 +87,7 @@ export default function Dashboard({ guests, baseUrl, usingSheet, loadError }: Pr
             <label htmlFor="seats">Seats</label>
             <input id="seats" name="seats" type="number" min={1} max={20} defaultValue={1} required />
           </div>
-          <button className="btn btn-terracotta" type="submit" disabled={pending}>
+          <button className="btn btn-clay" type="submit" disabled={pending}>
             {pending ? 'Saving…' : 'Add & generate link'}
           </button>
         </form>

@@ -1,7 +1,7 @@
 export function Sprig({ className }: { className: string }) {
   return (
     <svg className={className} viewBox="0 0 200 200" aria-hidden="true">
-      <use href="#leaf-branch" />
+      <use href="#rose-stem" />
     </svg>
   );
 }
@@ -11,21 +11,24 @@ export default function LeafDefs() {
     <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
       <defs>
         <g
-          id="leaf-branch"
+          id="rose-stem"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.3"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M20 180 C 60 140, 100 100, 170 30" />
-          <path d="M62 138 c -18 -22, -14 -44, 4 -56 c 12 18, 14 40, -4 56z" />
-          <path d="M92 108 c -24 -10, -40 -30, -36 -52 c 22 4, 40 22, 36 52z" />
-          <path d="M92 108 c 4 -24, 20 -42, 44 -46 c -2 24, -18 42, -44 46z" />
-          <path d="M122 78 c -20 -14, -30 -36, -22 -58 c 20 8, 30 32, 22 58z" />
-          <path d="M122 78 c 8 -22, 26 -36, 50 -36 c -6 22, -26 36, -50 36z" />
-          <path d="M150 50 c 0 -18, 8 -30, 20 -36 c 4 14, -4 30, -20 36z" />
-          <path d="M38 162 c -12 -8, -18 -20, -14 -32 c 12 6, 18 18, 14 32z" />
+          <path d="M22 182 C 50 150, 78 118, 118 76" />
+          <path d="M60 140 c -20 -14, -22 -40, -6 -54 c 16 14, 18 40, 6 54z" />
+          <path d="M60 140 c 4 -24, 22 -40, 46 -40 c -4 24, -22 40, -46 40z" />
+          <path d="M92 104 c -22 -10, -32 -34, -22 -56 c 22 10, 32 34, 22 56z" />
+          <path d="M36 166 c -14 -6, -20 -20, -14 -34 c 14 6, 20 20, 14 34z" />
+          <path d="M126 68 c -6 -18, 6 -36, 24 -40 c 18 -4, 34 10, 34 28 c 0 20, -18 34, -38 30 c -12 -2, -20 -10, -20 -18z" />
+          <path d="M132 62 c 0 -14, 12 -24, 26 -22 c 12 2, 20 12, 18 24 c -2 12, -14 20, -26 16 c -10 -2, -18 -10, -18 -18z" />
+          <path d="M140 58 c 2 -8, 10 -14, 18 -12 c 8 2, 12 10, 8 16 c -4 8, -14 10, -20 6 c -4 -2, -6 -6, -6 -10z" />
+          <path d="M148 54 c 4 -4, 10 -4, 12 0 c 2 4, -2 8, -6 8 c -4 0, -6 -4, -6 -8z" />
+          <path d="M126 68 c -10 6, -22 8, -32 4" />
+          <path d="M184 56 c 8 -10, 16 -12, 14 -4" />
         </g>
       </defs>
     </svg>

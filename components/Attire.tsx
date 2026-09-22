@@ -13,11 +13,11 @@ export default function Attire() {
           What to <em>Wear</em>
         </>
       }
-      side={<p className="chapter-note">Garden formal. Comfortable enough to dance in, dressed enough for a wedding.</p>}
+      side={<p className="chapter-note">Soft formal, in blush and neutrals. Comfortable enough to dance in, dressed enough for a wedding.</p>}
     >
       <p className="drop reveal">
-        Garden formal, with a 1920s lean. Think linen suits, waistcoats, flat caps, tea-length and
-        flowing gowns. Encouraged, never required.
+        Soft formal, candlelit. Think linen and silk in clay, blush, latte and champagne: slip dresses,
+        flowing gowns, light suits with a warm tie. Encouraged, never required.
       </p>
       <div className="palette reveal" role="list" aria-label="Suggested colour palette">
         {palette.map((c) => (
