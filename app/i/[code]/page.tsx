@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Hub from '@/components/Hub';
-import { getGuest } from '@/lib/guests';
+import { getGuestCached } from '@/lib/guests';
 
 type Props = { params: Promise<{ code: string }> };
 
@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params;
-  const guest = await getGuest(code);
+  const guest = await getGuestCached(code);
   if (!guest) return {};
   return {
     title: `For ${guest.name} — Antonio & Axzel`,
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PersonalInvitation({ params }: Props) {
   const { code } = await params;
-  const guest = await getGuest(code);
+  const guest = await getGuestCached(code);
   if (!guest) notFound();
   return <Hub guest={guest} />;
 }

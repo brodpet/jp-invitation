@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getGuest, isValidCode, saveReply, type Reply } from '@/lib/guests';
+import { revalidateTag } from 'next/cache';
+import { getGuest, guestTag, isValidCode, saveReply, type Reply } from '@/lib/guests';
 
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
@@ -35,6 +36,7 @@ export async function POST(req: Request) {
 
   try {
     await saveReply(reply);
+    revalidateTag(guestTag(code), { expire: 0 });
   } catch (err) {
     console.error('[rsvp] save failed', err);
     return NextResponse.json({ error: 'Could not record reply' }, { status: 502 });

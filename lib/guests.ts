@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { promises as fs } from 'fs';
 import path from 'path';
 
@@ -43,6 +44,19 @@ export const getGuest = cache(async (code: string): Promise<Guest | null> => {
   const g = list.find((x) => x.code.toLowerCase() === code.toLowerCase());
   return g ? normalize(g) : null;
 });
+
+// Pages read through this so moving between chapters does not hit Sheets each time.
+// The RSVP route invalidates the tag after a reply so status shows immediately.
+export function guestTag(code: string) {
+  return `guest-${code.toLowerCase()}`;
+}
+export function getGuestCached(code: string): Promise<Guest | null> {
+  if (!isValidCode(code)) return Promise.resolve(null);
+  return unstable_cache(() => getGuest(code), ['guest', code.toLowerCase()], {
+    revalidate: 300,
+    tags: [guestTag(code)],
+  })();
+}
 
 // ── Reply (public, by code) ───────────────────────────────────────────────
 export async function saveReply(reply: Reply): Promise<void> {
