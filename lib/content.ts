@@ -144,7 +144,7 @@ export const photos = [
 ];
 
 export const heroPhoto = {
-  src: '/gallery/hero.svg',
-  alt: 'Antonio and Axzel laughing together during their engagement photoshoot',
-  caption: 'Engagement, Cebu · 2026',
+  src: '/gallery/hero-couple.png',
+  alt: 'Antonio and Axzel standing together in a warm studio portrait',
+  caption: 'Antonio & Axzel · 2026',
 };
