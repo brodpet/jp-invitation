@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Hub from '@/components/Hub';
+import { event } from '@/lib/content';
 import { getGuestCached } from '@/lib/guests';
 
 type Props = { params: Promise<{ code: string }> };
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `For ${guest.name} — Antonio & Axzel`,
     openGraph: {
       title: `${guest.name}, you're invited`,
-      description: 'Antonio & Axzel · January 9, 2027 · Talisay City, Cebu. Open to respond.',
+      description: `Antonio & Axzel · January 9, 2027 · ${event.city}, ${event.province}. Open to respond.`,
     },
   };
 }

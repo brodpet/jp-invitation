@@ -97,7 +97,7 @@ export default function RsvpPrompt({ guest, onClose }: { guest: Guest; onClose: 
               {firstName(guest.name)}, will you <em>join us?</em>
             </h2>
             <p className="prompt-lede">
-              {event.dateLabel} in Talisay City. We have reserved{' '}
+              {event.dateLabel} in {event.city}, {event.province}. We have reserved{' '}
               <strong>{guest.seats === 1 ? 'one seat' : `${guest.seats} seats`}</strong> for you. Kindly reply by{' '}
               {event.rsvpBy}.
             </p>

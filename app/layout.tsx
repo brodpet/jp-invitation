@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Fraunces, Figtree } from 'next/font/google';
+import { event } from '@/lib/content';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -20,12 +21,12 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: 'Antonio & Axzel — January 9, 2027',
   description:
-    'Antonio Patalinghug III and Axzel Rosel Gallares invite you to their wedding on January 9, 2027 in Talisay City, Cebu.',
+    `Antonio Patalinghug III and Axzel Rosel Gallares invite you to their wedding on January 9, 2027 in ${event.city}, ${event.province}.`,
   robots: { index: false, follow: false },
   icons: { icon: '/favicon.svg' },
   openGraph: {
     title: 'Antonio & Axzel — Wedding Invitation',
-    description: 'Gather with us in the garden. January 9, 2027 · Talisay City, Cebu.',
+    description: `Gather with us in the garden. January 9, 2027 · ${event.city}, ${event.province}.`,
     type: 'website',
     locale: 'en_PH',
     siteName: 'Antonio & Axzel',

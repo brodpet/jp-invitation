@@ -1,4 +1,5 @@
 import { Sprig } from './LeafDefs';
+import { event } from '@/lib/content';
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
       <p className="foot-names">
         Antonio <em>&amp;</em> Axzel
       </p>
-      <p className="foot-date">January 9, 2027 · Talisay City, Cebu</p>
+      <p className="foot-date">January 9, 2027 · {event.city}, {event.province}</p>
       <p className="foot-quote">
         “A family is a risky venture, because the greater the love, the greater the loss. But still, we
         persevere.”

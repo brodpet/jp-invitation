@@ -9,8 +9,8 @@ export const event = {
   day: '9',
   month: 'January',
   year: '2027',
-  city: 'Talisay City',
-  province: 'Cebu',
+  city: 'Cataingan',
+  province: 'Masbate',
   rsvpBy: 'December 9, 2026',
   startIso: '2027-01-09T06:00:00Z', // 2:00 PM PHT
   endIso: '2027-01-09T13:00:00Z', // 9:00 PM PHT
@@ -33,16 +33,16 @@ export const schedule: Stop[] = [
     time: '1:30',
     meridiem: 'PM',
     label: 'Guests arrive',
-    venue: 'San Isidro Labrador Parish',
+    venue: 'San Vicente Ferrer Parish Church',
     note: 'Please be seated by 1:50. The bride walks in at two.',
   },
   {
     time: '2:00',
     meridiem: 'PM',
     label: 'Ceremony',
-    venue: 'San Isidro Labrador Parish',
-    address: 'Talisay City, Cebu',
-    mapsQuery: 'San Isidro Labrador Parish Talisay City Cebu',
+    venue: 'San Vicente Ferrer Parish Church',
+    address: 'Poblacion, Cataingan, Masbate',
+    mapsQuery: 'San Vicente Ferrer Parish Church Poblacion Cataingan Masbate',
   },
   {
     time: '3:15',
