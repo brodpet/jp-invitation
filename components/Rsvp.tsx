@@ -11,6 +11,7 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
   const initial: Status = guest?.status === 'accepted' || guest?.status === 'declined' ? guest.status : 'idle';
   const [status, setStatus] = useState<Status>(initial);
   const [error, setError] = useState('');
+  const [showFormImmediately, setShowFormImmediately] = useState(false);
   const maxSeats = guest?.seats ?? 1;
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -31,6 +32,7 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
       setStatus(data.attending === 'yes' ? 'accepted' : 'declined');
     } catch {
       setStatus('idle');
+      setShowFormImmediately(true);
       setError('Something went wrong sending your reply. Please try again, or message us directly.');
     }
   }
@@ -98,12 +100,19 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
               ? 'Your reply has been recorded. We can’t wait to celebrate with you.'
               : 'Thank you for letting us know. You will be in our thoughts on the day.'}
           </p>
-          <button className="link-arrow link-arrow-light" type="button" onClick={() => setStatus('idle')}>
+          <button
+            className="link-arrow link-arrow-light"
+            type="button"
+            onClick={() => {
+              setShowFormImmediately(true);
+              setStatus('idle');
+            }}
+          >
             Change my reply
           </button>
         </div>
       ) : (
-        <form className="rsvp-form reveal" onSubmit={onSubmit} noValidate>
+        <form className={`rsvp-form${showFormImmediately ? '' : ' reveal'}`} onSubmit={onSubmit} noValidate>
           <div className="field">
             <span className="field-label">Responding as</span>
             <p className="field-static">{guest.name}</p>
