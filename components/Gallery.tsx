@@ -28,6 +28,12 @@ export default function Gallery() {
           </figure>
         ))}
       </div>
+      <p className="photo-credit">
+        Photos by{' '}
+        <a href="https://www.facebook.com/PHOTOILLUSTRISIMO" target="_blank" rel="noopener noreferrer">
+          Photo Illustrisimo
+        </a>
+      </p>
     </Chapter>
   );
 }
