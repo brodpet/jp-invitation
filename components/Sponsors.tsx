@@ -17,16 +17,16 @@ export default function Sponsors() {
         </p>
       }
     >
-      <h3 className="sub reveal">Principal Sponsors</h3>
-      <ul className="couples reveal">
+      <h3 className="sub">Principal Sponsors</h3>
+      <ul className="couples">
         {principalSponsors.map(([a, b]) => (
           <li key={a + b}>
             {a} <span>&amp;</span> {b}
           </li>
         ))}
       </ul>
-      <h3 className="sub reveal">Secondary Sponsors</h3>
-      <ul className="couples couples-secondary reveal">
+      <h3 className="sub">Secondary Sponsors</h3>
+      <ul className="couples couples-secondary">
         {secondarySponsors.map((s) => (
           <li key={s.role}>
             <b>{s.role}</b>

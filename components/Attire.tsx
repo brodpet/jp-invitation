@@ -15,11 +15,11 @@ export default function Attire() {
       }
       side={<p className="chapter-note">Soft formal, in blush and neutrals. Comfortable enough to dance in, dressed enough for a wedding.</p>}
     >
-      <p className="drop reveal">
+      <p className="drop">
         Soft formal, candlelit. Think linen and silk in clay, blush, latte and champagne: slip dresses,
         flowing gowns, light suits with a warm tie. Encouraged, never required.
       </p>
-      <div className="palette reveal" role="list" aria-label="Suggested colour palette">
+      <div className="palette" role="list" aria-label="Suggested colour palette">
         {palette.map((c) => (
           <div className="swatch" role="listitem" key={c.name}>
             <span style={{ '--c': c.hex, '--b': c.border } as CSSProperties} />
@@ -27,8 +27,8 @@ export default function Attire() {
           </div>
         ))}
       </div>
-      <h3 className="sub reveal">Outfit inspiration</h3>
-      <ul className="looks reveal">
+      <h2 className="sub">Outfit inspiration</h2>
+      <ul className="looks">
         {looks.map((l) => (
           <li className="look" key={l.src}>
             <Image src={l.src} alt={l.alt} width={600} height={800} sizes="(min-width: 720px) 12rem, 45vw" loading="lazy" />
@@ -36,7 +36,7 @@ export default function Attire() {
           </li>
         ))}
       </ul>
-      <p className="fine reveal">Please avoid white and ivory — those are for the bride.</p>
+      <p className="fine">Please avoid white and ivory — those are for the bride.</p>
     </Chapter>
   );
 }

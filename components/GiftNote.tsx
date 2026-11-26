@@ -11,7 +11,7 @@ export default function GiftNote() {
         </>
       }
     >
-      <blockquote className="note-card reveal">
+      <blockquote className="note-card">
         <p>
           Your presence fills our hearts and makes our day complete. Should you wish to honor us with a
           gift, a monetary contribution would be gratefully received and will help us build a beautiful

@@ -29,7 +29,7 @@ export default function GalleryGrid() {
     <>
       <div className="photos">
         {featured.map((p, i) => (
-          <figure className={`photo reveal ${p.wide ? 'p-wide' : 'p-tall'}`} key={p.src}>
+          <figure className={`photo ${p.wide ? 'p-wide' : 'p-tall'}`} key={p.src}>
             <button type="button" className="photo-open" onClick={() => setIndex(i)} aria-label={`View larger: ${p.alt}`}>
               <Image
                 src={p.src}

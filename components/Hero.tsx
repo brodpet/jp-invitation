@@ -1,76 +1,47 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Sprig } from './LeafDefs';
 import Countdown from './Countdown';
 import { couple, event, heroPhoto } from '@/lib/content';
 
 export default function Hero({ guestName, base }: { guestName?: string; base: string }) {
   return (
-    <section className="hero" id="hero">
-      <Sprig className="sprig sprig-tl" />
-      <Sprig className="sprig sprig-br" />
-
-      <div className="hero-grid">
-        <div className="hero-copy">
-          <p className="eyebrow reveal">
-            {guestName ? <>An invitation for <b className="eyebrow-name">{guestName}</b></> : 'Together with their families'}
-          </p>
-          <h1 className="hero-names reveal">
-            <span className="name">
-              {couple.groom.first} <em>{couple.groom.last}</em>
-            </span>
-            <span className="amp" aria-hidden="true">
-              &amp;
-            </span>
-            <span className="name">
-              {couple.bride.first} <em>{couple.bride.last}</em>
-            </span>
-          </h1>
-          <p className="hero-lede reveal">invite you to gather in the garden as they are married.</p>
-          <div className="hero-date reveal">
-            <span className="date-big">{event.day}</span>
-            <span className="date-stack">
-              <span>{event.month}</span>
-              <span>{event.year}</span>
-            </span>
-            <span className="date-rule" />
-            <span className="date-place">
-              {event.city}
-              <br />
-              {event.province}
-            </span>
-          </div>
-          <div className="reveal">
-            <Countdown />
-          </div>
-          <div className="hero-actions reveal">
-            <Link className="btn btn-ink" href={`${base}/rsvp`}>
-              Respond by December 9
-            </Link>
-            <Link className="btn btn-line" href={`${base}/details`}>
-              The day’s details
-            </Link>
-          </div>
-        </div>
-
-        <figure className="hero-photo reveal">
-          <div className="deckle">
-            <Image
-              src={heroPhoto.src}
-              alt={heroPhoto.alt}
-              width={2400}
-              height={1600}
-              priority
-              sizes="(min-width: 900px) 26rem, 90vw"
-            />
-          </div>
-          <figcaption>{heroPhoto.caption}</figcaption>
-        </figure>
+    <section className="hero" id="hero" data-enter>
+      <div className="hero-media">
+        <Image src={heroPhoto.src} alt={heroPhoto.alt} fill priority sizes="100vw" />
       </div>
 
-      <a className="scroll-cue" href="#chapters" aria-label="Scroll to the pages">
-        <span />
-      </a>
+      <div className="hero-top wrap">
+        <p className="eyebrow enter">
+          {guestName ? <>An invitation for <b className="eyebrow-name">{guestName}</b></> : 'Together with their families'}
+        </p>
+        <h1 className="hero-names enter">
+          Antonio <em>&amp;</em> Axzel
+        </h1>
+        <p className="hero-lede enter">
+          {couple.groom.first} {couple.groom.last} and {couple.bride.first} {couple.bride.last} invite you
+          to the garden as they are married.
+        </p>
+      </div>
+
+      <div className="hero-bottom wrap">
+        <p className="hero-fact enter">
+          <span>{event.dateLabel}</span>
+          <span>
+            {event.city}, {event.province}
+          </span>
+        </p>
+        <div className="enter">
+          <Countdown />
+        </div>
+        <div className="hero-actions enter">
+          <Link className="btn btn-ink" href={`${base}/rsvp`}>
+            Respond by December 9
+          </Link>
+          <Link className="btn btn-glass" href={`${base}/details`}>
+            See the day’s plan
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

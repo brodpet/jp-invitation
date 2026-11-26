@@ -68,26 +68,31 @@ export const venues = schedule.filter((s) => s.mapsQuery);
 export const storyBeats = [
   {
     year: '2019',
+    photo: '/gallery/shoot/dsc09245.jpg',
     title: 'A borrowed umbrella',
     text: 'A sudden downpour in Cebu, one umbrella between two strangers, and a walk that went three blocks past where either of them was going.',
   },
   {
     year: '2020',
+    photo: '/gallery/shoot/dsc08473.jpg',
     title: 'The long way home',
     text: 'Long calls became a habit, then a comfort. When the world went quiet they learned each other in the details: how she takes her coffee, how he hums when he cooks.',
   },
   {
     year: '2023',
+    photo: '/gallery/shoot/dsc09012.jpg',
     title: 'A garden in the city',
     text: 'Their first apartment had a balcony the size of a doormat. They filled it with pots anyway. Everything grew.',
   },
   {
     year: '2026',
+    photo: '/gallery/shoot/dsc08711.jpg',
     title: 'The question',
     text: 'On an ordinary Sunday, under the same borrowed umbrella he had never returned, he asked. She said yes before he finished.',
   },
   {
     year: '2027',
+    photo: '/gallery/shoot/dsc08605.jpg',
     title: 'The garden, for real this time',
     text: 'On the ninth of January they will say it in front of the people who carried them here. This is the beginning of the best chapter yet.',
   },

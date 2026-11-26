@@ -11,7 +11,6 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
   const initial: Status = guest?.status === 'accepted' || guest?.status === 'declined' ? guest.status : 'idle';
   const [status, setStatus] = useState<Status>(initial);
   const [error, setError] = useState('');
-  const [showFormImmediately, setShowFormImmediately] = useState(false);
   const maxSeats = guest?.seats ?? 1;
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -32,7 +31,6 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
       setStatus(data.attending === 'yes' ? 'accepted' : 'declined');
     } catch {
       setStatus('idle');
-      setShowFormImmediately(true);
       setError('Something went wrong sending your reply. Please try again, or message us directly.');
     }
   }
@@ -56,10 +54,10 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
           </p>
         }
       >
-        <p className="rsvp-lede reveal">
+        <p className="rsvp-lede">
           Your personal invitation has been sent. Open the link in your message to confirm your attendance.
         </p>
-        <div className="rsvp-notice reveal">
+        <div className="rsvp-notice">
           <span className="rsvp-notice-label">Have an invitation?</span>
           <p>Use the personal link sent to you to respond. If you can’t find it, message Antonio or Axzel and we’ll resend it.</p>
         </div>
@@ -104,7 +102,6 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
             className="link-arrow link-arrow-light"
             type="button"
             onClick={() => {
-              setShowFormImmediately(true);
               setStatus('idle');
             }}
           >
@@ -112,7 +109,7 @@ export default function Rsvp({ guest }: { guest?: Guest }) {
           </button>
         </div>
       ) : (
-        <form className={`rsvp-form${showFormImmediately ? '' : ' reveal'}`} onSubmit={onSubmit} noValidate>
+        <form className="rsvp-form" onSubmit={onSubmit} noValidate>
           <div className="field">
             <span className="field-label">Responding as</span>
             <p className="field-static">{guest.name}</p>

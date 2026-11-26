@@ -23,21 +23,21 @@ export default function Entourage() {
         </>
       }
     >
-      <div className="parents reveal">
+      <div className="parents">
         <div>
-          <h3>Parents of the Bride</h3>
+          <h2>Parents of the Bride</h2>
           <NameList names={parents.bride} />
         </div>
         <div>
-          <h3>Parents of the Groom</h3>
+          <h2>Parents of the Groom</h2>
           <NameList names={parents.groom} />
         </div>
       </div>
 
-      <div className="roles reveal">
+      <div className="roles">
         {roles.map((r) => (
           <div className={`role${r.lead ? ' role-lead' : ''}`} key={r.title}>
-            <h3>{r.title}</h3>
+            <h2>{r.title}</h2>
             <NameList names={r.names} />
           </div>
         ))}

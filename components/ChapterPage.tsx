@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import TopBar from './TopBar';
-import RevealObserver from './RevealObserver';
-import LeafDefs from './LeafDefs';
 import Footer from './Footer';
 import Story from './Story';
 import Details from './Details';
@@ -48,8 +46,7 @@ export default function ChapterPage({ chapter, guest }: { chapter: Chapter; gues
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <TopBar base={base} current={chapter.slug} />
-      <RevealObserver />
+      <TopBar base={base} current={chapter.slug} hasHero />
       <main id="main" tabIndex={-1} className="page page-chapter">
         <Body slug={chapter.slug} guest={guest} />
         <nav className="chapter-nav" aria-label="Other pages">
@@ -79,7 +76,6 @@ export default function ChapterPage({ chapter, guest }: { chapter: Chapter; gues
         </nav>
       </main>
       <Footer />
-      <LeafDefs />
     </>
   );
 }
