@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Chapter from './Chapter';
+import GalleryMore from './GalleryMore';
+import GalleryMusic from './GalleryMusic';
 import { photos } from '@/lib/content';
 
 export default function Gallery() {
@@ -28,6 +30,8 @@ export default function Gallery() {
           </figure>
         ))}
       </div>
+      <GalleryMore />
+      <GalleryMusic />
       <p className="photo-credit">
         Photos by{' '}
         <a href="https://www.facebook.com/PHOTOILLUSTRISIMO" target="_blank" rel="noopener noreferrer">
