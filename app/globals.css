@@ -531,6 +531,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .shoot-photo { break-inside: avoid; margin-bottom: .75rem; background: #fbf9f6; padding: .35rem; box-shadow: 0 12px 26px -20px rgba(59, 47, 44, .5), 0 1px 3px rgba(59, 47, 44, .12); }
 @media (min-width: 720px) { .shoot-photo { margin-bottom: 1rem; } }
 .shoot-photo img { display: block; width: 100%; height: auto; background: var(--paper-3); }
+.photo-open { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.photo-open:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
 .shoot-toggle { display: flex; justify-content: center; margin-top: 2.5rem; }
 .music-toggle {
   position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 40;
