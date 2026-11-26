@@ -31,7 +31,7 @@ export default function Gallery() {
       <p className="photo-credit">
         Photos by{' '}
         <a href="https://www.facebook.com/PHOTOILLUSTRISIMO" target="_blank" rel="noopener noreferrer">
-          Photo Illustrisimo
+          PHOTO I illustrisimo
         </a>
       </p>
     </Chapter>
