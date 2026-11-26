@@ -516,14 +516,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* Gallery */
 .chapter#gallery .chapter-body { max-width: none; }
 .photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-@media (min-width: 720px) { .photos { grid-template-columns: repeat(4, 1fr); grid-auto-flow: dense; } .p-wide { grid-column: span 2; } }
+.p-wide { grid-column: span 2; }
+@media (min-width: 720px) { .photos { grid-template-columns: repeat(3, 1fr); align-items: center; } }
 .photo { position: relative; background: #fbf9f6; padding: .5rem .5rem 1.6rem; box-shadow: 0 16px 34px -22px rgba(59, 47, 44, .5), 0 1px 3px rgba(59, 47, 44, .12); transition: transform .4s var(--ease); }
 .photo:nth-child(odd) { transform: rotate(-.8deg); }
 .photo:nth-child(even) { transform: rotate(.7deg); }
 .photo:hover { transform: rotate(0) translateY(-4px); z-index: 1; }
 .photo img { width: 100%; height: 100%; object-fit: cover; background: var(--paper-3); }
-.p-wide img { aspect-ratio: 3 / 2; }
-.p-tall img { aspect-ratio: 3 / 4; }
+.p-wide img { aspect-ratio: 2048 / 1463; }
+.p-tall img { aspect-ratio: 2 / 3; }
 .has-reveal .photo.reveal { transform: translateY(18px) rotate(0); }
 .has-reveal .photo.reveal.is-in:nth-child(odd) { transform: rotate(-.8deg); }
 .has-reveal .photo.reveal.is-in:nth-child(even) { transform: rotate(.7deg); }

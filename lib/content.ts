@@ -135,12 +135,10 @@ export const secondarySponsors = [
 ];
 
 export const photos = [
-  { src: '/gallery/photo-1.svg', alt: 'Antonio and Axzel walking hand in hand along a tree-lined path', wide: true },
-  { src: '/gallery/photo-2.svg', alt: 'Axzel resting her head on Antonio’s shoulder' },
-  { src: '/gallery/photo-3.svg', alt: 'Antonio and Axzel sharing a quiet moment in the garden' },
-  { src: '/gallery/photo-4.svg', alt: 'The couple seated together at golden hour', wide: true },
-  { src: '/gallery/photo-5.svg', alt: 'Portrait of Antonio and Axzel looking at each other' },
-  { src: '/gallery/photo-6.svg', alt: 'Axzel’s hand with her engagement ring' },
+  { src: '/gallery/photoshoot-1.jpg', alt: 'Two close-up frames of Antonio and Axzel nose to nose, laughing, with their names between them', wide: true },
+  { src: '/gallery/photoshoot-3.jpg', alt: 'Four smiling portraits of Antonio and Axzel on the grass, including heart-hand poses' },
+  { src: '/gallery/photoshoot-4.jpg', alt: 'Antonio kissing Axzel’s forehead beneath a flowering bougainvillea tree' },
+  { src: '/gallery/photoshoot-2.jpg', alt: 'Three frames of Antonio and Axzel sitting on the lawn, Axzel hugging Antonio from behind', wide: true },
 ];
 
 export const heroPhoto = {

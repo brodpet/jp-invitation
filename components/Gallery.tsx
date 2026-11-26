@@ -20,9 +20,9 @@ export default function Gallery() {
             <Image
               src={p.src}
               alt={p.alt}
-              width={p.wide ? 1200 : 800}
-              height={p.wide ? 800 : 1200}
-              sizes={p.wide ? '(min-width: 720px) 34rem, 100vw' : '(min-width: 720px) 17rem, 50vw'}
+              width={p.wide ? 2048 : 1365}
+              height={p.wide ? 1463 : 2048}
+              sizes={p.wide ? '(min-width: 720px) 66vw, 100vw' : '(min-width: 720px) 33vw, 50vw'}
               loading="lazy"
             />
           </figure>
