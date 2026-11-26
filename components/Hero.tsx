@@ -58,8 +58,8 @@ export default function Hero({ guestName, base }: { guestName?: string; base: st
             <Image
               src={heroPhoto.src}
               alt={heroPhoto.alt}
-              width={900}
-              height={1200}
+              width={2400}
+              height={1600}
               priority
               sizes="(min-width: 900px) 26rem, 90vw"
             />

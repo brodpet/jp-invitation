@@ -142,7 +142,7 @@ export const photos = [
 ];
 
 export const heroPhoto = {
-  src: '/gallery/hero-couple.png',
-  alt: 'Antonio and Axzel standing together in a warm studio portrait',
+  src: '/gallery/hero-couple.jpg',
+  alt: 'Antonio and Axzel smiling on a garden bench beneath a flowering bougainvillea tree',
   caption: 'Antonio & Axzel · 2026',
 };
